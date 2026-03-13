@@ -176,7 +176,7 @@ Widget iconwhatever(IconData iconname, String whatever) {
 
 Widget listDisplayer(IconData iconname, String whatever) {
   return Container(
-    margin: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+    margin: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
     padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 10),
 
     width: double.infinity,

@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:practiceidk/pages/favorites.dart';
 import 'package:practiceidk/pages/login.dart';
 import 'package:practiceidk/pages/profile.dart';
+import 'package:practiceidk/pages/search.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -46,7 +47,23 @@ Future<List<Event>> fetchEventData() async {
     }
     return daata;
   }
-  
+
+Future <void> searchVal(inputt) async {
+    if (daata.isEmpty) {
+      await fetchEventData();
+    }
+    if (inputt != null && inputt.isNotEmpty) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => SearchPage(result: daata, inputsa: inputt))).then((_) {
+                        setState(() {
+                          _controller.text = "";
+                        }); }
+                
+      
+    );
+    }
+
+}
+
   
   @override
   Widget build(BuildContext context) {
@@ -137,11 +154,34 @@ Future<List<Event>> fetchEventData() async {
 
           return 
           SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Container(
+                  margin: EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 70,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: c.border, width: 3)
+                  ),
+                  child: TextField(
+                    controller: _controller,
+                    onSubmitted: (value) {
+                        searchVal(value);
+                      },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15),
+                      hintText: "Whats up?",
+                      prefixIcon: IconButton(onPressed: () {
+                        searchVal(_controller.text);
+                      }, icon: Icon(Icons.search))
+                    ),
+                  ),
+                ),
                 // Today's Events
                 Container(
                   width: double.infinity,
